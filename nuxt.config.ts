@@ -24,13 +24,4 @@ export default defineNuxtConfig({
     ]
   ],
   css: ['~/assets/scss/main.scss'],
-  
-  runtimeConfig: {
-    public: {
-      googleFormUrl: process.env.GOOGLE_FORM_URL,
-      googleFormEntryName: process.env.GOOGLE_FORM_ENTRY_NAME,
-      googleFormEntryEmail: process.env.GOOGLE_FORM_ENTRY_EMAIL,
-      googleFormEntryComment: process.env.GOOGLE_FORM_ENTRY_COMMENT
-    }
-  }
 });

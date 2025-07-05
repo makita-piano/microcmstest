@@ -6,38 +6,6 @@
       <div class="content">
         <small>お問い合わせ</small>
         <h1>Contact</h1>
-        <form v-if="!isSubmitted" @submit.prevent="submit">
-          <div class="your_name">
-            <label for="your_name">お名前<span>*</span></label>
-            <input type="text" v-model="form.your_name" placeholder="山田 太郎" required>
-          </div>
-          <div>
-            <label for="mail">メールアドレス<span>*</span></label>
-            <input type="email" v-model="form.email" placeholder="hogehoge@example.co.jp" required>
-          </div>
-          <div>
-            <label for="comment">お問い合わせ内容<span>*</span></label>
-            <textarea v-model="form.comment" cols="30" rows="10" placeholder="お問い合わせ内容をご記入ください" required></textarea>
-          </div>
-
-          <!-- プライバシーポリシー同意チェックボックス -->
-          <div class="privacy-policy justify-center">
-            <input type="checkbox" v-model="form.privacy_agreed" id="privacy_agreed" required>
-            <label for="privacy_agreed" class="flex items-center relative top-[3px]">
-              <nuxt-link to="/privacy-policy" class="ml-2">プライバシーポリシー</nuxt-link>に同意します
-            </label>
-          </div>
-          <button
-            class="items-center bg-blue-600 text-white px-6 py-4 rounded-full font-bold transition-colors duration-300 hover:bg-blue-800 max-w-[240px] mx-auto"
-            type="submit" :disabled="!form.privacy_agreed">
-            上記の内容で送信する
-          </button>
-        </form>
-
-        <div v-if="isSubmitted" class="thank-you-message">
-          <h2>お問い合わせありがとうございます。</h2>
-          <p>担当者よりご連絡いたしますので、しばらくお待ちください。</p>
-        </div>
       </div>
     </section>
   </div>
@@ -59,42 +27,6 @@ const breadcrumbsArray = [
 ]
 
 // フォームデータ
-const form = ref({
-  your_name: "",
-  email: "",
-  comment: "",
-  privacy_agreed: false
-})
-
-// 送信完了フラグ
-const isSubmitted = ref(false)
-const runtimeConfig = useRuntimeConfig();
-const submit = async () => {
-  try {
-    const response = await useFetch('https://ghostform.net/api/v1/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        url: runtimeConfig.public.googleFormUrl,
-        data: {
-          [runtimeConfig.public.googleFormEntryName]: form.value.your_name,
-          [runtimeConfig.public.googleFormEntryEmail]: form.value.email,
-          [runtimeConfig.public.googleFormEntryComment]: form.value.comment
-        }
-      })
-    })
-
-    if (response.status.value === 'success') {
-      isSubmitted.value = true // 送信成功時にフォームを非表示にし、メッセージを表示
-    } else {
-      console.error('送信に失敗しました')
-    }
-  } catch (error) {
-    console.error('リクエスト中にエラーが発生しました:', error)
-  }
-}
 </script>
 
 <style lang="scss" scoped>

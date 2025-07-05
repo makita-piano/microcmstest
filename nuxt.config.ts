@@ -12,11 +12,6 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/sitemap',
-    ['nuxt-gtag',
-      {
-        id: process.env.GOOGLE_ANALYTICS_ID
-      }
-    ],
     [
       'nuxt-microcms-module',
       {

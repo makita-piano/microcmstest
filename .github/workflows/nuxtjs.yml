@@ -26,6 +26,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      MICRO_CMS_API_KEY: ${{ secrets.MICRO_CMS_API_KEY }}
+      MICRO_CMS_DOMAIN: ${{ secrets.MICRO_CMS_DOMAIN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,9 +65,6 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Static HTML export with Nuxt
-        env:
-          MICRO_CMS_API_KEY: ${{ secrets.MICRO_CMS_API_KEY }}
-          MICRO_CMS_DOMAIN: ${{ secrets.MICRO_CMS_DOMAIN }}
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
 
       - name: Upload artifact

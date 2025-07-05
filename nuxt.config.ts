@@ -1,22 +1,26 @@
 export default defineNuxtConfig({
-  ssr: true,
+  ssr: true, // ✅ 必須です！
   app: {
     baseURL: '/',
-    cdnURL: 'https://microcmstest.klavier.page/'
+    cdnURL: 'https://microcmstest.klavier.page/' // ← これを追加
   },
+  compatibilityDate: '2024-04-03',
+  devtools: { enabled: true },
   nitro: {
-    preset: 'static'
+    preset: 'static',
   },
-  css: ['~/assets/scss/main.scss'],
   modules: [
-    'nuxt-microcms-module',
+    '@nuxt/eslint',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/sitemap',
-    '@nuxt/eslint'
+    [
+      'nuxt-microcms-module',
+      {
+        serviceDomain: process.env.MICRO_CMS_DOMAIN,
+        apiKey: process.env.MICRO_CMS_API_KEY,
+        target: 'server'
+      },
+    ]
   ],
-  microCMS: {
-    serviceDomain: process.env.MICRO_CMS_DOMAIN,
-    apiKey: process.env.MICRO_CMS_API_KEY,
-    target: 'server'
-  }
-})
+  css: ['~/assets/scss/main.scss']
+});

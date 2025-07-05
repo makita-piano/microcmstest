@@ -1,4 +1,8 @@
 export default defineNuxtConfig({
+  app: {
+    baseURL: '/',
+    cdnURL: 'https://microcmstest.klavier.page/' // ← これを追加
+  },
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   target: 'static',

@@ -1,4 +1,3 @@
-# Sample workflow for building and deploying a Nuxt site to GitHub Pages
 #
 # To get started with Nuxt see: https://nuxtjs.org/docs/get-started/installation
 #
@@ -71,6 +70,9 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Static HTML export with Nuxt
+        env:
+          MICRO_CMS_API_KEY: ${{ secrets.MICRO_CMS_API_KEY }}
+          MICRO_CMS_DOMAIN: ${{ secrets.MICRO_CMS_DOMAIN }}
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

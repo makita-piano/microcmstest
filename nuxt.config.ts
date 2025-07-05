@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  ssr: true, // ✅ 必須です！
   app: {
     baseURL: '/',
     cdnURL: 'https://microcmstest.klavier.page/' // ← これを追加

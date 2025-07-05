@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  baseURL: '/microcmstest/',
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   target: 'static',
